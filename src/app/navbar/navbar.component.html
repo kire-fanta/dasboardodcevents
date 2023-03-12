@@ -1,0 +1,382 @@
+<div class="navbar-nav align-items-center ms-auto">
+  <!-- <div class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+      <i class="fa fa-bell me-lg-2"></i>
+      <span class="d-none d-lg-inline-flex">Notifications</span>
+    </a>
+    <div
+      class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0"
+    >
+    <div href="#" class="dropdown-item"  *ngFor="let notif1 of notif  | paginate : { itemsPerPage: 5, currentPage: n, id:'test' }">
+      <div class="d-flex align-items-center">
+        <img
+          class="rounded-circle"
+          src="{{notif1.imagecreateur}}"
+          alt="" srcset=""
+          style="width: 40px; height: 40px"
+        />
+        <div class="ms-2">
+          <h6 class="fw-normal mb-0">{{notif1.createur}} vient de publier dans le {{notif1.ministere}}</h6>
+          <small>{{ notif1.datenotif | date: 'dd/MM/yyyy HH:mm:ss' }}</small>
+        </div>
+       
+      </div>
+    
+      <hr class="dropdown-divider" />
+
+    
+
+    </div>
+    <div class="pag">
+      <pagination-controls
+      id="test"
+        (pageChange)="n = $event"
+        nextLabel="Suivants"
+        previousLabel="Précedents"
+        [responsive]="responsive"
+      ></pagination-controls>
+    </div>
+   
+    </div>
+  </div> -->
+
+  <div class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+      <img
+        class="rounded-circle me-lg-2" 
+        src=" "
+        alt=""
+        style="width: 40px; height: 40px"
+      />
+      <span class="d-none d-lg-inline-flex">{{user?.nom}} {{user?.prenom}}</span>
+    </a>
+    <div
+      class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0"
+    >
+      <a href="#" class="dropdown-item"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop3"
+      >Mon Profile</a>
+
+        <a href="#" class="dropdown-item"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop2"
+      >Changer mots de passe</a>
+
+            >
+      <a (click)="logout()" class="dropdown-item" routerLink="/connexion"
+        >Déconnexion</a
+      >
+    </div>
+  </div>
+
+
+     <!-- Modal de modif -->
+     <div
+     class="modal fade"
+     id="staticBackdrop3"
+     data-bs-backdrop="static"
+     data-bs-keyboard="false"
+     tabindex="-1"
+     aria-labelledby="staticBackdropLabel"
+     aria-hidden="true"
+   >
+     <div class="modal-dialog">
+       <div class="modal-content">
+        <form
+        #updateForm="ngForm"
+>
+         <div class="modal-header">
+           <h5 class="modal-title" id="staticBackdropLabel">
+             Information du compte Admin
+           </h5>
+           <button
+             type="button"
+             class="btn-close"
+             data-bs-dismiss="modal"
+             aria-label="Close"
+           ></button>
+         </div>
+         <div class="modal-body">
+    
+          <div class="form-group">
+          <div class="avtar">
+            <label for="image">
+              <img src="{{ imageUrl }}{{ user?.imageprofil }}" />
+            </label>
+            <input
+              id="image"
+              style="visibility: hidden"
+              (change)="onProfilePictureSelected($event)"
+              #fileToUpload
+              type="file"
+              name="imageprofil"
+              placeholder="photo"
+              accept="image/*"
+              [(ngModel)]="imageprofil"
+              (click)="fileToUpload.click()"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="nom">Nom: </label>
+          <input
+            type="text"
+            ngModel="{{ user?.nom }}"
+            class="form-control"
+            id="nom"
+            name="nom"
+            aria-describedby="nom"
+            placeholder="Entrez votre nom"
+            [(ngModel)]="nom"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="prenom">Prenom: </label>
+          <input
+            type="text"
+            id="prenom"
+            name="prenom"
+            ngModel="{{ user?.prenom }}"
+            [(ngModel)]="prenom"
+            aria-describedby="prenom"
+            placeholder="Entrez votre prenom"
+            required
+          />
+        </div>
+    <div class="form-group">
+          <label for="email">E-mail: </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            ngModel="{{ user?.email }}"
+            [(ngModel)]="email"
+            placeholder="Entrez votre Email"
+            disable
+          />
+        </div>
+         <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            ngModel="{{ user?.username }}"
+            type="text"
+            [(ngModel)]="username"
+            name="username"
+            id="username"
+            placeholder="Username"
+          />
+        </div>
+         </div>
+         <div class="modal-footer">
+           <button
+             type="button"
+             class="btn-secondary"
+             data-bs-dismiss="modal"
+             style="width: 85px; border-radius: 10px; height: 35px;"
+           >
+             Annuler
+           </button>
+           <button
+             type="submit"
+             class="btn-primary"
+             style="width: 90px; border-radius: 10px; background-color: #63C4FE; color: white; height: 35px;"
+           >
+             Modifier
+           </button>
+         </div>
+        </form>
+       </div>
+
+
+       
+     </div>
+   </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+ <!-- Modal de modif -->
+     <div
+     class="modal fade"
+     id="staticBackdrop2"
+     data-bs-backdrop="static"
+     data-bs-keyboard="false"
+     tabindex="-1"
+     aria-labelledby="staticBackdropLabel"
+     aria-hidden="true"
+   >
+     <div class="modal-dialog">
+       <div class="modal-content">
+        <form
+        #updateForm="ngForm"
+>
+         <div class="modal-header">
+              <div class="user-details">
+        <div class="form-group">
+          <label for="currentpassword">Ancien Mots de passe: </label>
+          <input
+            type="password"
+            id="currentpassword"
+            class="form-control"
+            name="currentpassword"
+            placeholder="Ancien Mots de passe"
+            required
+            [(ngModel)]="modif1.currentpassword"
+          />
+        </div>
+        <div class="form-group">
+          <label for="newpassword">Nouveau Mots de passe: </label>
+          <input
+            id="newpassword"
+            type="password"
+            class="form-control"
+            name="newpassword"
+            placeholder="Nouveau mots de passe"
+            required
+            [(ngModel)]="modif1.newpassword"
+          />
+        </div>
+        <div class="form-group">
+          <label for="confirmpassword">Confirmer Mots de passe: </label>
+          <input
+            id="confirmpassword"
+            type="password"
+            class="form-control"
+            name="confirmpassword"
+            placeholder="Confirmer Nouveau mots de passe"
+            required
+            [(ngModel)]="modif1.confirmpassword"
+          />
+        </div>
+
+        <button (click)="ModifierMotdepasse()" class="b">Enregistrer</button>
+                <button
+             type="button"
+             class="btn-secondary"
+             data-bs-dismiss="modal"
+             style="width: 85px; border-radius: 10px; height: 35px;"
+           >
+             Annuler
+           </button>
+
+      </div>
+          
+           <!-- <h5 class="modal-title" id="staticBackdropLabel">
+             Information du compte Admin
+           </h5>
+           <button
+             type="button"
+             class="btn-close"
+             data-bs-dismiss="modal"
+             aria-label="Close"
+           ></button>
+         </div>
+         <div class="modal-body">
+    
+          <div class="form-group">
+          <div class="avtar">
+            <label for="image">
+              <img src="{{ imageUrl }}{{ user?.imageprofil }}" />
+            </label>
+            <input
+              id="image"
+              style="visibility: hidden"
+              (change)="onProfilePictureSelected($event)"
+              #fileToUpload
+              type="file"
+              name="imageprofil"
+              placeholder="photo"
+              accept="image/*"
+              [(ngModel)]="imageprofil"
+              (click)="fileToUpload.click()"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="nom">Nom: </label>
+          <input
+            type="text"
+            ngModel="{{ user?.nom }}"
+            class="form-control"
+            id="nom"
+            name="nom"
+            aria-describedby="nom"
+            placeholder="Entrez votre nom"
+            [(ngModel)]="nom"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="prenom">Prenom: </label>
+          <input
+            type="text"
+            id="prenom"
+            name="prenom"
+            ngModel="{{ user?.prenom }}"
+            [(ngModel)]="prenom"
+            aria-describedby="prenom"
+            placeholder="Entrez votre prenom"
+            required
+          />
+        </div>
+    <div class="form-group">
+          <label for="email">E-mail: </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            ngModel="{{ user?.email }}"
+            [(ngModel)]="email"
+            placeholder="Entrez votre Email"
+            disable
+          />
+        </div>
+         <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            ngModel="{{ user?.username }}"
+            type="text"
+            [(ngModel)]="username"
+            name="username"
+            id="username"
+            placeholder="Username"
+          />
+        </div>
+         </div>
+         <div class="modal-footer">
+           <button
+             type="button"
+             class="btn-secondary"
+             data-bs-dismiss="modal"
+             style="width: 85px; border-radius: 10px; height: 35px;"
+           >
+             Annuler
+           </button>
+           <button
+             type="submit"
+             class="btn-primary"
+             style="width: 90px; border-radius: 10px; background-color: #63C4FE; color: white; height: 35px;"
+           >
+             Modifier
+           </button>
+         </div> -->
+         </div> 
+        </form>
+       </div>
+
+
+       
+     </div>
+   </div>
+
+

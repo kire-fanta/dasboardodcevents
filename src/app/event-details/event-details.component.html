@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Détails budgétaires de l'événement</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th {
+      font-size: 1em;
+      background-color: #ff6600;
+      font-size: 0.8em !important;
+    }
+    th, td {
+      text-align: center;
+      border: 1px solid #ddd;
+      padding: 8px;
+      font-size: 0.8em;
+    }
+    tr:hover {
+      background-color: #d9d9d9;
+      transition: background-color 0.5s ease-out;
+    }
+    .budget-total {
+      font-size: 1.5em;
+      width: 100%;
+    }
+    .budget-total span {
+      color: #ff6600;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Détails budgétaires de l'événement</h1>
+    <button type="button" onclick="history.back()">Retour</button>
+  </header>
+  
+  <main>
+    <button type="button" (click)="ajouterBudget()"> AJouter un Budget</button>
+    <div class="table-responsive" style="margin-top: 10vh">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-4">Libelle</th>
+            <th class="col-3">Prix unitaire</th>
+            <th class="col-2">Quantite</th>
+            <th class="col-3">Montant</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let budget of budgetsUn">
+            <td class="col-4">{{budget.libelle}}</td>
+            <td class="col-3">{{budget.prixUnitaire}}</td>
+            <td class="col-2">{{budget.quantite}}</td>
+            <td class="col-3">{{budget.prixUnitaire * budget.quantite}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 class="budget-total">
+        <b> Budget Total: <span>{{monTotal}}</span></b>
+      </h4>
+    </div>
+  </main>
+  
+</body>
+
+</html>
+

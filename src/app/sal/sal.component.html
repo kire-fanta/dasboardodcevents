@@ -1,0 +1,91 @@
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">Ajouter une salle</div>
+    <div class="card-buttons">
+      <button class="close-button" (click)="close()">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <form #form="ngForm" && (ngSubmit)="AjoutSalle()">
+      <div class="form-group">
+        <label for="nombreplace">Nombre de places</label>
+        <input
+          type="number"
+          id="nombreplace"
+          name="nombreplace"
+          [(ngModel)]="nombreplace"
+          required
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="libelle">Libelle</label>
+        <input
+          type="text"
+          id="libelle"
+          name="libelle"
+          [(ngModel)]="libelle"
+          required
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="etage">Etage</label>
+        <input
+          type="text"
+          id="etage"
+          name="etage"
+          [(ngModel)]="etage"
+          required
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="disponibilite">Disponibilité</label>
+        <input
+          type="checkbox"
+          id="disponibilite"
+          name="disponibilite"
+          [(ngModel)]="disponibilite"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          [(ngModel)]="description"
+          class="form-control"
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="image">Image</label>
+        <input
+          type="file"
+          id="image"
+          name="image"
+          [(ngModel)]="image"
+          (change)="televerser($event)"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="numero">Numero</label>
+        <input
+          type="number"
+          id="numero"
+          name="numero"
+          [(ngModel)]="numero"
+          required
+          class="form-control"
+        />
+      </div>
+      <button type="submit" [disabled]="!form.valid" class="btn btn-primary">
+        Ajouter
+      </button>
+    </form>
+  </div>
+</div>

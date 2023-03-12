@@ -1,0 +1,66 @@
+<div>
+  <h2>Création de l'événement</h2>
+  <button (click)="goBack()" [routerLink]="['']">
+    Retour
+  </button>
+  <form #form="ngForm" (ngSubmit)="ajouterEvenement()">
+    <label for="nom">Nom de l'événement</label>
+    <input type="text" id="nom" name="nom" [(ngModel)]="nom" required>
+    
+    <label for="type">Type</label>
+    <select id="type" name="type" [(ngModel)]="type" required>
+      <option value="conférence">Conférence</option>
+      <option value="festival">Festival</option>
+      <option value="exposition">Exposition</option>
+    </select>
+    
+    <label for="id_status">Statut</label>
+    <select id="id_status" name="id_status" [(ngModel)]="id_status" required>
+      <option *ngFor="let s of status" [value]="s.idStatus">{{s.status}}</option>
+    </select>
+    
+    <label for="heureDebut">Heure de début</label>
+    <input type="time" id="heureDebut" name="heureDebut" [(ngModel)]="heureDebut">
+    
+    <label for="heureFin">Heure de Fin</label>
+    <input type="time" id="heureFin" name="heureFin" [(ngModel)]="heureFin">
+    
+    <label for="datedebut">Date debut</label>
+    <input type="date" id="datedebut" name="datedebut" [(ngModel)]="datedebut">
+    
+    <label for="datefin">Date fin</label>
+    <input type="date" id="datefin" name="datefin" [(ngModel)]="datefin">
+    
+    <label for="description">Description</label>
+    <textarea id="description" name="description" [(ngModel)]="description"></textarea>
+    
+    <label>Lieu</label>
+    <select [(ngModel)]="location" (change)="onLocationChange($event)">
+      <option value="inside">Au siège</option>
+      <option value="outside">A l'extérieur</option>
+    </select>
+    
+    <div *ngIf="location === 'inside'">
+      <label for="salle">Salle</label>
+      <select id="salle" (change)="onRoomChange($event)">
+        <option *ngFor="let salle of mesSalles" [value]="salle.libelle">{{salle.libelle}}</option>
+      </select>
+    </div>
+    
+    <div *ngIf="location === 'outside'">
+      <label for="adresse">Adresse</label>
+      <input type="text" id="adresse" name="adresse" [(ngModel)]="location">
+    </div>
+    
+    <div *ngIf="location === 'outside'">
+      <label for="geoloc">Géolocalisation</label>
+      <input type="text" id="geoloc">
+    </div>
+    
+    <label for="image">Image</label>
+    <input type="file" id="image" (change)="televerser($event)">
+    
+    <button type="submit" [disabled]="form.invalid">Ajouter l'événement</button>
+  </form>
+</div>
+

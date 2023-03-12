@@ -1,0 +1,165 @@
+<div class="container-fluid" style="overflow: hidden">
+  <div class="row flex-nowrap">
+    <div
+      id="sidebar"
+      *ngIf="menuBureau"
+      class="col-auto sidebar collapse collapse-horizontal show"
+      style="height: 100vh"
+    >
+      <app-menu></app-menu>
+    </div>
+    <div class="d-flex justify-content-end w-100">
+      <app-navbar></app-navbar>
+    </div>
+
+    <main
+      class="col"
+      style="height: 100vh; overflow: scroll; overflow-x: hidden"
+    >
+      <nav
+        class="bg-danger navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0"
+      >
+        <h1 style="width: 20px"></h1>
+        <a
+          href="#"
+          class="sidebar-toggler flex-shrink-0"
+          data-bs-toggle="collapse"
+          data-bs-target="#sidebar"
+          aria-expanded="false"
+          (click)="afficheMenuMobile()"
+          aria-controls="collapseWidthExample"
+        >
+          <i class="fa fa-bars"></i>
+        </a>
+
+        <div class="d-flex justify-content-end w-100">
+          <app-navbar></app-navbar>
+        </div>
+      </nav>
+
+      <div class="container"></div>
+    </main>
+  </div>
+</div>
+
+
+
+
+
+ 
+
+  
+  
+      
+
+
+
+
+
+
+
+      <div class="main--content">
+        <div class="container-fluid ">
+   
+          <div class="row flex-nowrap">
+            <div class="col-auto px-2">
+            </div>
+            <main class="col ps-md-2 pt-2  " style=" height: 100vh ;">
+              
+              <div class="container">
+                <div class="row boxShadow">
+        
+                  
+                  <!------------- Colonne Droite ---->
+                  <div class="col-12 col-md-16">
+                    <!-- <button fill="transparent" >
+                      
+                      <i name="arrow-back-sharp" style="color: #E88441;"></i>
+                    </button> -->
+                   
+                    <form>
+                      <fieldset>
+                        <legend class="display-6 text-center my-3"><b>Ajouter un utilisateur</b></legend>
+                      </fieldset>
+                       <form
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit1()"
+        #f="ngForm"
+        novalidate
+      >
+                      <div class="trait"></div>
+                      <div class="row col-12">
+                        
+                        <div class="mb-3 col-12 col-md-6 form-row form-floating">
+                          <input type="text" name="nom" id="nom" placeholder="Nom" class="form form-control inputvalue"
+                            [(ngModel)]="form.nom"
+                             #nom="ngModel"
+            autocomplete="off">
+                          <label for="nom">Nom</label>
+                        </div>
+        
+                        <div class="mb-3 col-12 col-md-6 form-row form-floating">
+                          <input type="text" name="prenom" id="prenom" placeholder="Prénom" class="form form-control inputvalue"
+                            [(ngModel)]="form.prenom"
+                             #prenom="ngModel"
+            autocomplete="off">
+                          <label for="prenom">Prénom</label>
+                        </div>
+                        <div class="mb-3 col-12 col-md-6 form-row form-floating">
+                          <input type="email" name="email" id="email" placeholder="Email" class="form form-control inputvalue"
+                            [(ngModel)]="form.email"
+                            #email="ngModel"
+            autocomplete="off"
+          />
+                          <label for="email">Email</label>
+                        </div>
+        
+                        <div class="mb-3 col-12 col-md-6 form-row form-floating">
+                          <input type="text" name="username" id="username" placeholder="Nom d'utilisateur" class="form form-control inputvalue"
+                             [(ngModel)]="form.username"
+                              #username="ngModel"
+            autocomplete="off">
+                          <label for="username">Nom d'utilisateur</label>
+                        </div>
+                      
+        
+                        <div class="mb-3 col-12 col-md-6 form-row form-floating">
+                          <input type="text" name="password" id="password" placeholder="Mot de Passe" class="form form-control inputvalue"
+                             [(ngModel)]="form.password"
+                               #password="ngModel"
+            autocomplete="off">
+                          <label for="password">Mot de Passe</label>
+                        </div>
+                        <!-- <div class="mb-3 col-12 col-md-6 form-row form-floating">
+                          <input type="text" name="adresse" id="adresse" placeholder="Adresse" class="form form-control inputvalue">
+                          <label for="adresse">Adresse</label>
+                        </div> -->
+                        <div class="mb-3 col-12 col-md-6 form-row form-floating">
+                          
+                        </div>
+        
+                      </div>
+                      <button class="btn btnAjouter" type="submit">Ajouter</button>
+        <br>
+        
+                    </form>
+       </form>
+                  </div>
+                </div>
+               
+              </div>
+            </main>
+          </div>
+        </div>
+        
+        
+       
+        
+      </div>
+
+
+
+
+
+
+

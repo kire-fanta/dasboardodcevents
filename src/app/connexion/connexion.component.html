@@ -1,0 +1,45 @@
+
+  <div class="container">
+    <div class="row boxShadow">
+      <!------------- Colonne Gauche---->
+      <div class="contenu py-5 col-md-8 essaie">
+        <div class="col-12  col-md-6 imgGauche" style="height: 100%; width: 75%;margin-left: 5%; margin-bottom: 20px;">
+          <div class="py-5"></div>
+           <!-- <img src="../../assets/images/SALLE 7.jpg" alt=""> -->
+          <h2 class="display-5 text-center" style="font-weight: bold;">Bienvenue</h2>
+          <h6>Sur <span style="color:#FF6600">Odc </span>Events</h6>
+        </div>
+      </div>
+      <!------------- Colonne Droite ---->
+      <div class="col-12 col-md-4 form" style="position: absolute; background-color: #FFF;height: 62%; margin-top: 1%; margin-left: 45%; z-index: 999;">
+        <form class="py-3 px-3" *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <fieldset>
+            <legend class="display-6 text-center my-3"><b>Connexion</b></legend>
+          </fieldset>
+          <div class="trait"></div>
+          <div class="row col-12">
+            <div class="mb-2" *ngIf="f.submitted && isLoginFailed">
+              <div class="col-12 alert alert-danger">
+                <span class="px-4 w-100">Mot de passe ou Username incorrect</span>
+              </div>
+            </div>
+            <div class="mb-3 form-row form-floating">
+              <input type="text" name="username" id="floatingInput" placeholder="Email ou Numero" class="form-control inputvalue" [(ngModel)]="form.username" required #username="ngModel" [ngClass]="{ 'is-invalid': f.submitted && username.errors }" />
+              <label for="floatingInput">Votre username</label>
+              <div class="erreur" *ngIf="username.errors && f.submitted">Champ Email ou numero obligatoire !!</div>
+            </div>
+            <div class="mb-3 form-row form-floating">
+              <input type="password" name="password" id="floatingPassword" placeholder="Mot de Passe" class="form-control inputvalue" [(ngModel)]="form.password" required minlength="6" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.errors }" />
+              <label for="floatingPassword">Mot de passe</label>
+              <div *ngIf="password.errors && f.submitted" class="erreur">
+                <div *ngIf="password.errors['required']">Mot de passe obligatoire</div>
+                <div *ngIf="password.errors['minlength']">Le mot de passe doit contenir au moins 6 caractères</div>
+              </div>
+            </div>
+            <button type="submit" class="btn-p py-3 w-100 mb-4">Se connecter</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+

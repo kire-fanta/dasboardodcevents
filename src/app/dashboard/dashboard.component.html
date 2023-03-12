@@ -1,0 +1,703 @@
+<div class="container-fluid" style="overflow: hidden">
+  <div class="row flex-nowrap">
+    <div
+      id="sidebar"
+      class="col-auto sidebar collapse collapse-horizontal show"
+      *ngIf="menuBureau"
+      style="height: 100vh"
+    >
+      <app-menu></app-menu>
+    </div>
+    <main
+      class="col"
+      style="height: 100vh; overflow: scroll; overflow-x: hidden"
+    >
+      <nav
+        class="bg-danger navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0"
+      >
+        <h1 style="width: 20px"></h1>
+        <a
+          href="#"
+          class="sidebar-toggler flex-shrink-0"
+          data-bs-toggle="collapse"
+          data-bs-target="#sidebar"
+          aria-expanded="false"
+          (click)="afficheMenuMobile()"
+          aria-controls="collapseWidthExample"
+        >
+          <i class="fa fa-bars"></i>
+        </a>
+
+        <div class="d-flex justify-content-end w-100">
+          <app-navbar></app-navbar>
+        </div>
+      </nav>
+
+      <div class="container-fluid pt-4 px-4">
+        <div class="row g-4 d-flex justify-content-between">
+          <div class="col-sm-6 col-xl-3">
+            <div
+              class="bg-light rounded d-flex align-items-center justify-content-between p-4"
+            >
+              <img
+                src="../../assets/images/Event 4.jpg"
+                height="50"
+                width="50"
+                style="text-align: center; padding-top: 5px"
+                alt=""
+                srcset=""
+              />
+
+              <div class="ms-3">
+                <p class="mb-2">Total Evenement</p>
+                <h6 class="mb-0">{{ evenementstotal }}</h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div
+              class="bg-light rounded d-flex align-items-center justify-content-between p-4"
+            >
+              <img
+                src="../../assets/images/SALLE 7.jpg"
+                height="50"
+                width="50"
+                style="text-align: center; padding-top: 5px"
+                alt=""
+                srcset=""
+              />
+              <div class="ms-3">
+                <p class="mb-2">Total Salles</p>
+                <h6 class="mb-0">{{ sallestotal }}</h6>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-sm-6 col-xl-3"> -->
+          <!-- <div
+              class="bg-light rounded d-flex align-items-center justify-content-between p-4"
+            >
+              <img
+                src="../../assets/comment.png"
+                height="50"
+                width="50"
+                style="text-align: center; padding-top: 5px"
+                alt=""
+                srcset=""
+              />
+              <div class="ms-3">
+                <p class="mb-2">Total Commentaires</p>
+                <h6 class="mb-0">23</h6>
+              </div>
+            </div> -->
+          <!-- </div> -->
+          <!-- <div class="col-sm-6 col-xl-3">
+            <div
+              class="bg-light rounded d-flex align-items-center justify-content-between p-4"
+            >
+              <i class="bx bxs-user-circle fa-3x" style="color: black"></i>
+              <div class="ms-3">
+                <p class="mb-2">Total Utilisateur</p>
+                <h6 class="mb-0">10</h6>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+
+      <div
+        class="row re"
+        style="margin-left: auto; margin-right: auto; margin-top: 10px"
+      >
+        <div class="col d-flex justify-content-between">
+          <!-- Button trigger modal -->
+          <button
+            type="submit"
+            class="ajout"
+            style="
+              height: 40px;
+              background-color: #FF6600;
+              border-radius: 12px;
+              color: white;
+              margin-left: 2%;
+              border: 1px solid white;
+            "
+            class=""
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop1"
+          >
+            &nbsp; Créer un evenement &nbsp;
+          </button>
+
+          <!-- <button
+            type="submit"
+            class="ajout"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop1"
+            style="height: 40px"
+          >
+            Ajouter Gros Mots
+          </button> -->
+
+          <!-- Modal -->
+
+          <div
+            class="modal fade"
+            id="staticBackdrop1"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+            style="margin-left: 500px !important; margin-top: 50px"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div>
+                  <h2>Création de l'événement</h2>
+
+                  <form #form="ngForm" (ngSubmit)="ajouterEvenement()">
+                    <div class="row">
+                      <label for="nom">Nom de l'événement</label>
+                      <input
+                        type="text"
+                        id="nom"
+                        name="nom"
+                        [(ngModel)]="nom"
+                        required
+                      />
+
+                      <label for="type">Type</label>
+
+                      <select id="type" name="type" [(ngModel)]="type" required>
+                        <option value="conférence">Conférence</option>
+                        <option value="festival">Festival</option>
+                        <option value="exposition">Exposition</option>
+                      </select>
+                    </div>
+
+                    <div class="row">
+                      <label for="id_status">Statut</label>
+                      <select
+                        id="id_status"
+                        name="id_status"
+                        [(ngModel)]="id_status"
+                        required
+                      >
+                        <option *ngFor="let s of status" [value]="s.idStatus">
+                          {{ s.status }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="row mt-3">
+                      <div class="col">
+                        <label for="heureDebut">Heure de début</label>
+                        <input
+                          type="time"
+                          id="heureDebut"
+                          name="heureDebut"
+                          [(ngModel)]="heureDebut"
+                        />
+                      </div>
+                      <div class="col">
+                        <label for="heureFin">Heure de Fin</label>
+                        <input
+                          type="time"
+                          id="heureFin"
+                          name="heureFin"
+                          [(ngModel)]="heureFin"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <label for="datedebut">Date debut</label>
+                      <input
+                        type="date"
+                        id="datedebut"
+                        name="datedebut"
+                        [(ngModel)]="datedebut"
+                      />
+
+                      <label for="datefin">Date fin</label>
+                      <input
+                        type="date"
+                        id="datefin"
+                        name="datefin"
+                        [(ngModel)]="datefin"
+                      />
+                    </div>
+                    <div class="row">
+                      <label for="description">Description</label>
+                      <textarea
+                        id="description"
+                        name="description"
+                        [(ngModel)]="description"
+                      ></textarea>
+                    </div>
+                    <div class="row">
+                      <label>Lieu</label>
+                      <select
+                        [(ngModel)]="location"
+                        (change)="onLocationChange($event)"
+                      >
+                        <option value="inside">Au siège</option>
+                        <option value="outside">A l'extérieur</option>
+                      </select>
+                    </div>
+                    <div *ngIf="location === 'inside'" class="row">
+                      <label for="salle">Salle</label>
+                      <select id="salle" (change)="onRoomChange($event)">
+                        <option
+                          *ngFor="let salle of mesSalles"
+                          [value]="salle.libelle"
+                        >
+                          {{ salle.libelle }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div *ngIf="location === 'outside'" class="row">
+                      <label for="adresse">Adresse</label>
+                      <input
+                        type="text"
+                        id="adresse"
+                        name="adresse"
+                        [(ngModel)]="location"
+                      />
+                    </div>
+
+                    <div *ngIf="location === 'outside'" class="row">
+                      <label for="geoloc">Géolocalisation</label>
+                      <input type="text" id="geoloc" />
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="image">Image</label>
+                      <input
+                        type="file"
+                        id="image"
+                        (change)="televerser($event)"
+                      />
+                    </div>
+                    <button
+                      class="btn-primary"
+                      type="submit"
+                      [disabled]="form.invalid"
+                    >
+                      Ajouter l'événement
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal de modif -->
+          <div
+            class="modal fade"
+            id="staticBackdrop2"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <form #update="ngForm">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">
+                      Modification de Ministere
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <div class="input-box">
+                        <Label
+                          >Ajouter image
+                          <span style="color: red">*</span></Label
+                        >
+                        <input
+                          type="file"
+                          placeholder="Logo.jpg"
+                          id="image"
+                          name="image"
+                          class="form-control"
+                          accept="image/png, image/jpeg, image/jpg"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-box">
+                        <span> Libelle <span style="color: red">*</span></span>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="libelle"
+                          id="libelle"
+                          placeholder="Donner le nom du ministère"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-box">
+                        <span>
+                          Description <span style="color: red">*</span></span
+                        >
+                        <textarea
+                          type="text"
+                          class="form-control"
+                          name="description"
+                          id="description"
+                          placeholder="Donner une petite description du ministère"
+                          required
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Annuler
+                    </button>
+                    <button type="submit" class="btn-primary">
+                      Actualiser
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="staticBackdrop"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">
+                    Création de Ministere
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="form">
+                    <div class="input-box">
+                      <Label
+                        >Ajouter image <span style="color: red">*</span></Label
+                      >
+                      <input
+                        type="file"
+                        placeholder="Logo.jpg"
+                        id="logo"
+                        name="image"
+                        class="form-control"
+                        accept="image/png, image/jpeg, image/jpg"
+                        required
+                      />
+                    </div>
+                    <div class="input-box">
+                      <Label> Libelle<span style="color: red">*</span></Label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="libelle"
+                        id="libelle"
+                        placeholder="Donner le nom du ministère"
+                        required
+                      />
+                    </div>
+                    <div class="input-box">
+                      <Label>
+                        Description <span style="color: red">*</span></Label
+                      >
+                      <textarea
+                        type="text"
+                        class="form-control"
+                        name="description"
+                        id="description"
+                        placeholder="Donner une petite description du ministère"
+                        required
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Annuler
+                  </button>
+                  <button type="button" class="btn-primary">Ajouter</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="container-fluid pt-4 px-4"
+        style="margin-left: -2.2%; width: 104%"
+      >
+        <div class="row g-4">
+          <div class="col">
+            <div class="bg-light rounded p-4">
+              <div class="d-flex">
+                <div
+                  class="d-flex align-items-center justify-content-between mb-4"
+                >
+                  <h6 class="mb-0 py-1">La liste des Evenement</h6>
+                </div>
+                <div class="col-md-4">
+                  <div class="d-none d-md-flex ms-4">
+                    <i class="bx bx-search icon fa-2x py-1"></i>
+                    <input
+                      class="form-control border-0 border-2 border-start border-end border-alert"
+                      type="search"
+                      placeholder="Rechercher..."
+                      [(ngModel)]="searchText"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row cards mx-auto py-auto">
+                <div
+                  class="col-md-12 justify-content-between segment-buttons"
+                  style="display: flex"
+                >
+                  <button
+                    style="
+                      height: 40px;
+                      background-color: #ff6600;
+                      border-radius: 12px;
+                      color: white;
+                      margin-left: 2%;
+                      border: 1px solid white;
+                    "
+                    class="segment-button"
+                    (click)="GetEventByState('avenir')"
+                  >
+                    &nbsp; Evénements à venir &nbsp;
+                  </button>
+                  <button
+                    style="
+                      height: 40px;
+                      background-color: #ff6600;
+                      border-radius: 12px;
+                      color: white;
+                      margin-left: 2%;
+                      border: 1px solid white;
+                    "
+                    class="segment-button"
+                    (click)="GetEventByState('termine')"
+                  >
+                    &nbsp; Evénements passés &nbsp;
+                  </button>
+                  <button
+                    style="
+                      height: 40px;
+                      background-color: #ff6600;
+                      border-radius: 12px;
+                      color: white;
+                      margin-left: 2%;
+                      border: 1px solid white;
+                    "
+                    class="segment-button"
+                    (click)="GetEventByState('encour')"
+                  >
+                    &nbsp; Evénements en cours &nbsp;
+                  </button>
+                </div>
+
+                <div class="segment-content">
+                  <!-- evenement a venir -->
+                  <div
+                    class="upcoming-events"
+                    *ngIf="selectedSegment === 'upcoming'"
+                  >
+                    <div
+                      class="row event"
+                      *ngFor="let event of upcomingEvents; let i = index"
+                    >
+                      <div class="col-md-3 py-2 mx-auto">
+                        <img
+                          src="{{ event.image }}"
+                          style="width: 80%; height: 100%"
+                        />
+                      </div>
+
+                      <div class="col-md-9 py-2 mx-auto carde">
+                        <div class="row">
+                          <div class="col-md-2">
+                            <div class="col-md-12">
+                              <i class="fas fa-clock"></i> Heure
+                            </div>
+                            <div class="col-md-12">
+                              <i class="fas fa-map-marker-alt"></i> Localisation
+                            </div>
+                          </div>
+
+                          <div class="col-md-10">
+                            <div class="row justify-content-between">
+                              <div class="col-md-9">
+                                <h2>{{ event.nomEvenement }} .</h2>
+                              </div>
+                            </div>
+                            <div class="col">
+                              <p class="event-date">
+                                {{ event.datedebut | date : "dd/MM/yyyy" }} -
+                                {{ event.datefin | date : "dd/MM/yyyy" }}
+                              </p>
+                            </div>
+                            <div class="col">
+                              <p>{{ event.description }}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- fin====================================================================== -->
+
+                  <!-- evenement passé))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))) -->
+                  <div class="past-events" *ngIf="selectedSegment === 'past'">
+                    <div class="event row" *ngFor="let event of pastEvents">
+                      <div class="col-md-3 py-2 mx-auto">
+                        <img
+                          src="{{ event.image }}"
+                          style="width: 80%; height: 100%"
+                        />
+                      </div>
+
+                      <div class="col-md-9 py-2 mx-auto carde">
+                        <div class="row">
+                          <div class="col-md-2">
+                            <div class="col-md-12">
+                              <i class="fas fa-clock"></i> Heure
+                            </div>
+                            <div class="col-md-12">
+                              <i class="fas fa-map-marker-alt"></i> Localisation
+                            </div>
+                          </div>
+
+                          <div class="col-md-10">
+                            <div class="row justify-content-between">
+                              <div class="col-md-9">
+                                <h2>{{ event.nomEvenement }} .</h2>
+                              </div>
+                            </div>
+                            <div class="col">
+                              <p class="event-date">
+                                {{ event.datedebut | date : "dd/MM/yyyy" }} -
+                                {{ event.datefin | date : "dd/MM/yyyy" }}
+                              </p>
+                            </div>
+                            <div class="col">
+                              <p>{{ event.description }}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- fin----------------------------------------------------------------------------- -->
+
+                  <!-- evenement courant---------------------------------------------------------------- -->
+                  <div
+                    class="current-events mx-auto"
+                    *ngIf="selectedSegment === 'current'"
+                  >
+                    <div class="row event" *ngFor="let event of currentEvents">
+                      <div class="col-md-3 py-2 mx-auto">
+                        <img
+                          src="{{ event.image }}"
+                          style="width: 80%; height: 100%"
+                        />
+                      </div>
+
+                      <div class="col-md-9 py-2 mx-auto carde">
+                        <div class="row">
+                          <div class="col-md-2">
+                            <div class="col-md-12">
+                              <i class="fas fa-clock"></i> Heure
+                            </div>
+                            <div class="col-md-12">
+                              <i class="fas fa-map-marker-alt"></i> Localisation
+                            </div>
+                          </div>
+
+                          <div class="col-md-10">
+                            <div class="row justify-content-between">
+                              <div class="col-md-9">
+                                <h2>{{ event.nomEvenement }} .</h2>
+                              </div>
+                            </div>
+                            <div class="col">
+                              <p class="event-date">
+                                {{ event.datedebut | date : "dd/MM/yyyy" }} -
+                                {{ event.datefin | date : "dd/MM/yyyy" }}
+                              </p>
+                            </div>
+                            <div class="col">
+                              <p>{{ event.description }}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pag">
+              <pagination-controls
+                (pageChange)="p = $event"
+                nextLabel="Suivants"
+                previousLabel="Précedents"
+                [responsive]="responsive"
+              ></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <header>
+        <div class="image">
+          <img src="../assets/IMAGE/ok.png" alt="" />
+        </div>
+      </header>
+
+      <content> </content>
+    </main>
+  </div>
+</div>
+<app-footer> </app-footer>
